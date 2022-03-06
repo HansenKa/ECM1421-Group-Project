@@ -1,0 +1,50 @@
+Install Visual Studio with C++ Desktop package (to be able to install pyodbc)
+In cmd 
+	-> pip install pyodbc (if you get an error message about wheels then pip install wheels)
+
+Get database running
+	-> Move .bak to C:\
+	In SSMS 
+	-> Rightclick Databases
+	-> Restore Database
+	-> Device
+	-> Add .bak file
+	-> Set Database to NymptonFoodHub (Type it in)
+	-> Press Ok
+
+Enable User Login in SSMS
+	-> Rightclick your server
+	-> Properties
+	-> Security
+	-> SQL Server and Windows Authentication mode
+
+Create User in SSMS
+	-> Security
+	-> Rightclick Logins
+	-> New Logins
+	-> Set Login name = PAUser // PythonAssignmentUser
+	-> SQL Server Authentication
+	-> Set Password & ConfirmPassword = #Python1
+	-> Untick Enforce password expiration 
+	-> Ok
+
+Enable Database Access for User
+	-> Security
+	-> Logins
+	-> Rightclick PAUser
+	-> Properties
+	-> User Mapping
+	-> NymptonFoodHub
+	-> Ok
+
+
+
+Using helpers.py
+	-> Place helpers.py in same directory as the file you wish to use it in.
+	import helpers as helpers # May have missing import error but ignore it (pylance linting error not an actual error)
+
+	sql(query)
+		print(helpers.sql('{INSERT SQL QUERY HERE e.g. SELECT * FROM Contact}'))
+
+	sqlStoredProcedure(storedProcedure, parameters)
+		print(helpers.sqlStoredProcedure('Exec [dbo].[{StoredProcedureName}] @{param1} = ?, @{param2} = ?', ('{param1value}', '{param2value}')))
